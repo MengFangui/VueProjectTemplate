@@ -19,16 +19,19 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				use: [{
+					//加载与编译vue文件
 					loader: 'vue-loader',
 					options: {
 						loaders: {
 							less: ExtractTextPlugin.extract({
 								//minimize 启用压缩
 								use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
+								//加载vue文件中的样式文件
 								fallback: 'vue-style-loader'
 							}),
 							css: ExtractTextPlugin.extract({
 								use: ['css-loader', 'autoprefixer-loader', 'less-loader'],
+								//加载vue文件中的样式文件
 								fallback: 'vue-style-loader'
 							})
 						}
@@ -38,6 +41,7 @@ module.exports = {
 			//iview文件夹下的js编译处理
 			{
 				test: /iview\/.*?js$/,
+				//es6编译为es5
 				loader: 'babel-loader'
 			},
 			//js编译处理
@@ -50,8 +54,9 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
-					//minimize 启用压缩
+					//css-loader加载css样式文件,minimize 启用压缩
 					use: ['css-loader?minimize', 'autoprefixer-loader'],
+					//将样式表直接插入到页面的<style>内
 					fallback: 'style-loader'
 				})
 			},
@@ -59,6 +64,7 @@ module.exports = {
 			{
 				test: /\.less/,
 				use: ExtractTextPlugin.extract({
+					//less-loader编译与加载less文件(需要依赖less库)
 					use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
 					fallback: 'style-loader'
 				})
